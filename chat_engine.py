@@ -87,7 +87,8 @@ def vraag_aan_groq(vraag, context):
                     "content": (
                         "Je bent een Nederlandse productspecialist bij Kastol. "
                         "Gebruik alleen de onderstaande context om te antwoorden. "
-                        "Als je het antwoord niet zeker weet, geef dat dan eerlijk toe.
+                        "Als je het antwoord niet zeker weet, geef dat dan eerlijk toe."
+
 
 "
                         f"{context}"
