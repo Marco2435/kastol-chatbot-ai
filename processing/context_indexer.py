@@ -1,7 +1,7 @@
-
 import faiss
 import os
 import pickle
+import numpy as np
 from groq_api import get_embedding
 from processing.context_cleaner import clean_context
 
@@ -13,10 +13,17 @@ def maak_semantische_index(documenten):
     metadata = []
 
     for doc in documenten:
-        schone_tekst = clean_context(doc)
+        schone_tekst = clean_context(doc.get("inhoud", ""))
         vector = get_embedding(schone_tekst)
         embeddings.append(vector)
-        metadata.append(schone_tekst)
+        metadata.append({
+            "inhoud": schone_tekst,
+            "merk": doc.get("merk", ""),
+            "model": doc.get("model", ""),
+            "type": doc.get("type", ""),
+            "afmetingen": doc.get("afmetingen", ""),
+            "referentie": doc.get("referentie", "")
+        })
 
     dimension = len(embeddings[0])
     index = faiss.IndexFlatL2(dimension)
@@ -38,6 +45,13 @@ def zoek_relevante_context(vraag, topk=3):
     vraag_vector = np.array([vraag_vector]).astype('float32')
 
     D, I = index.search(vraag_vector, topk)
-    resultaten = [metadata[i] for i in I[0] if i < len(metadata)]
+    resultaten = []
+
+    for i in I[0]:
+        if i < len(metadata):
+            item = metadata[i]
+            resultaten.append(
+                f"{item['merk']} {item['model']} {item['type']} {item['afmetingen']} -> Referentie: {item['referentie']}"
+            )
 
     return "\n".join(resultaten)
