@@ -5,3 +5,4 @@ reportlab
 requests
 joblib
 scikit-learn
+PyPDF2
