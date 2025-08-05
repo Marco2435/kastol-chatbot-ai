@@ -24,4 +24,4 @@ def parse_excel(file_path):
             "inhoud": inhoud
         })
 
-    return resultaten
+    return "\n".join([r["inhoud"] for r in resultaten])
