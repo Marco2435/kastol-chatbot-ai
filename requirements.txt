@@ -8,3 +8,4 @@ scikit-learn
 PyPDF2
 pytesseract
 python-docx
+beautifulsoup4
