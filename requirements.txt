@@ -6,3 +6,4 @@ requests
 joblib
 scikit-learn
 PyPDF2
+pytesseract
