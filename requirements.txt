@@ -9,3 +9,5 @@ PyPDF2
 pytesseract
 python-docx
 beautifulsoup4
+fuzzywuzzy
+python-Levenshtein
