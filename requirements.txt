@@ -11,3 +11,4 @@ python-docx
 beautifulsoup4
 fuzzywuzzy
 python-Levenshtein
+faiss-cpu
